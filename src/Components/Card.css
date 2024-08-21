@@ -5,28 +5,28 @@
     left: 20px;
     width: 448px;
     height: 476px;
-    flex-direction: column;
+    flex-direction: row;
     background-color: #ffffff;
     border-radius: 24px;
     box-shadow: 2px 0px 10px rgba(3,3,3,0.1);
     position: relative;
     align-items: center;
+    gap: 50px;
   }
 
   .image-container {
     position: relative;
-    width: 90%;
+    width: 95%;
     height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
     margin: auto;
   }
 
   .image-container img {
-    width: 100%;
-    height: 100%;
+    width: 85%;
+    height: 85%;
     margin: auto;
     object-fit: cover;
     border-radius: 10px; 
@@ -62,7 +62,7 @@
     padding: 20px; 
   }
 
-  .buttonType {
+  .queueButton {
     cursor: pointer;
     top: 586px;
     left: 34px;
