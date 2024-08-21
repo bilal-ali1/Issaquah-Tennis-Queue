@@ -47,7 +47,7 @@
     font-weight: normal;
   }
 
-  .button {
+  .buttonType {
     cursor: pointer;
     top: 586px;
     left: 34px;
@@ -63,6 +63,7 @@
     font-family: "Roboto";
     line-height: 20px;
     outline: none;
+    text-align: center;
   }
 
 
