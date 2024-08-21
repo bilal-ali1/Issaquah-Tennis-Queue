@@ -1,11 +1,10 @@
 import React from 'react';
 import './App.css';
+import Card from './Components/Card';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Yo</h1>
-    </div>
+    <Card parkName="Central Park" location="New York City, New York"/>
   );
 }
 
