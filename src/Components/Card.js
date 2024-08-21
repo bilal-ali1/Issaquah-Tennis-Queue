@@ -11,8 +11,8 @@ function Card(props) {
                 <h1>{props.parkName}</h1>
                 <h2>{props.location}</h2>
             </div>
-            <div className='buttonType'>
-                <h1>Join the queue</h1>
+            <div className='buttonContainer'>
+                <button className='buttonType'>Join the queue</button>
             </div>
         </div>
     );

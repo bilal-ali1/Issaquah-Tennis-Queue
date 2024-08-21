@@ -1,22 +1,27 @@
+
+
 .card-container {
     top: 184;
     left: 20px;
     width: 448px;
     height: 476px;
+    flex-direction: column;
     background-color: #ffffff;
     border-radius: 24px;
     box-shadow: 2px 0px 10px rgba(3,3,3,0.1);
     position: relative;
+    align-items: center;
   }
 
   .image-container {
     position: relative;
-    width: 80%;
+    width: 90%;
     height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    margin: auto;
   }
 
   .image-container img {
@@ -25,16 +30,18 @@
     margin: auto;
     object-fit: cover;
     border-radius: 10px; 
+    margin-top: 20px;
 }
 
 .card-content {
     font-family: "Open Sans";
+    margin-left: 10px;
 }
 
   .h1 {
     color: #000000;
     font-size: 20px;
-    font-family: "Open Sans";
+    font-family: "Montserrat";
     font-weight: 600;
     line-height: 28px;
   }
@@ -42,9 +49,17 @@
   .h2 {
     color: #030303;
     font-size: 14px;
-    font-family: "Open Sans";
+    font-family: "Montserrat";
     line-height: 20px;
     font-weight: normal;
+  }
+
+  .buttonContainer {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    padding: 20px; 
   }
 
   .buttonType {
@@ -59,12 +74,13 @@
     border-radius: 24px;
     background-color: #030303;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 18px;
     font-family: "Roboto";
     line-height: 20px;
     outline: none;
     text-align: center;
   }
+
 
 
 
