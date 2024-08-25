@@ -36,8 +36,8 @@
 }
 
 .card-body ul {
-  list-style-type: none; /* Removes bullet points */
-  padding-left: 0; /* Removes default padding from the left */
+  list-style-type: none; 
+  padding-left: 0; 
 }
 
 .card-button {

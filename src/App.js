@@ -9,13 +9,13 @@ function App() {
       image: '/images/nyc.jpg', 
       parkName: 'Central Park',
       location: '123 Park Ave, New York, NY',
-      courts: ['Court 1 wait time: 30 mins', 'Court 2 wait time: 1 hr', 'Court 3: Open']
+      courts: ['Court 1: 30 mins', 'Court 2: 1 hr', 'Court 3: Open']
     },
     {
       image: '/images/park2.webp',
       parkName: 'Riverside Park',
       location: 'Riverside Dr, New York, NY',
-      courts: ['Court 1 wait time: 30 mins', 'Court 2: Open', 'Court 3: Open']
+      courts: ['Court 1: 30 mins', 'Court 2: Open', 'Court 3: Open']
     },
     {
       image: '/images/park3.jpg',
@@ -30,9 +30,9 @@ function App() {
       <Navbar />
       <h1 className="title">Parks Nearby</h1>
       <div className="card-grid">
-        {parks.map((park, index) => (
+        {parks.map((park, availibility) => (
           <Card
-            key={index}
+            key={availibility}
             image={park.image}
             parkName={park.parkName}
             location={park.location}
