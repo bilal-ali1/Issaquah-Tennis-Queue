@@ -1,0 +1,64 @@
+/* Styles for the pop-up form container */
+.form-popup {
+    position: fixed; /* Make the form appear over other content */
+    top: 50%; /* Center the form vertically */
+    left: 50%; /* Center the form horizontally */
+    transform: translate(-50%, -50%); /* Offset the form to be perfectly centered */
+    background-color: white; /* Background color of the form */
+    padding: 20px; /* Padding inside the form */
+    border-radius: 10px; /* Rounded corners for the form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for a floating effect */
+    z-index: 1000; /* Ensure the form appears above other elements */
+    width: 300px; /* Width of the form */
+  }
+  
+  /* Styles for form input fields */
+  .form-popup input[type="text"],
+  .form-popup input[type="email"] {
+    width: 100%; /* Make the input fields take up the full width */
+    padding: 10px; /* Padding inside the input fields */
+    margin: 5px 0 10px; /* Space around the input fields */
+    border: 1px solid #ccc; /* Border around the input fields */
+    border-radius: 5px; /* Rounded corners for the input fields */
+    box-sizing: border-box; /* Ensure padding does not affect the width */
+  }
+  
+  /* Styles for the form header */
+  .form-popup h2 {
+    margin-top: 0; /* Remove top margin */
+    margin-bottom: 15px; /* Add some space below the heading */
+    font-size: 1.5em; /* Increase the font size */
+    text-align: center; /* Center the heading text */
+  }
+  
+  /* Styles for the submit and close buttons */
+  .form-popup button[type="submit"],
+  .form-popup button[type="button"] {
+    width: 100%; /* Make buttons take up the full width */
+    padding: 10px; /* Padding inside the buttons */
+    margin: 5px 0; /* Space around the buttons */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners for the buttons */
+    background-color: #007bff; /* Blue background for the buttons */
+    color: white; /* White text on the buttons */
+    font-size: 1em; /* Font size for the buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+  }
+  
+  .form-popup button[type="button"]:hover,
+  .form-popup button[type="submit"]:hover {
+    background-color: #03b300; 
+  }
+  
+  /* Optional: Add a semi-transparent background overlay */
+  .form-popup::before {
+    content: ''; /* Empty content for the overlay */
+    position: fixed; /* Fixed position */
+    top: 0; /* Cover the entire screen */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: -1; /* Ensure the overlay is behind the form */
+  }
+  
