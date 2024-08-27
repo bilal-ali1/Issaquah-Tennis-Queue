@@ -1,5 +1,18 @@
 {
+  "name": "Tennis Queue",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "npm --prefix frontend start",
+    "start:backend": "npm --prefix backend start",
+    "build:frontend": "npm --prefix frontend build",
+    "test:frontend": "npm --prefix frontend test",
+    "eject:frontend": "npm --prefix frontend eject",
+    "build:backend": "npm --prefix backend build",
+    "test:backend": "npm --prefix backend test",
+    "eject:backend": "npm --prefix backend eject"
+  },
   "dependencies": {
-    "firebase": "^10.13.0"
+    "concurrently": "^6.0.0"
   }
 }

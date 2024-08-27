@@ -8,21 +8,27 @@ function App() {
     {
       image: '/images/nyc.jpg', 
       parkName: 'Central Park',
-      location: '123 Park Ave, New York, NY',
-      courts: ['Court 1: 30 mins', 'Court 2: 1 hr', 'Court 3: Open']
+      location: '1907 NE Park Dr, Issaquah, WA',
+      courts: [['Court 1: ', '30 mins'], ['Court 2: ', '1 hr']]
     },
     {
       image: '/images/park2.webp',
-      parkName: 'Riverside Park',
-      location: 'Riverside Dr, New York, NY',
-      courts: ['Court 1: 30 mins', 'Court 2: Open', 'Court 3: Open']
+      parkName: 'Black Nugget Park',
+      location: '1953 24th Ave NE, Issaquah, WA',
+      courts: [['Court 1: ', '30 mins'] , ['Court 2: ', 'Open']]
     },
     {
       image: '/images/park3.jpg',
-      parkName: 'Prospect Park',
-      location: 'Prospect Park West, Brooklyn, NY',
-      courts: ['Court 1: 1 hr', 'Court 2: 1 hr', 'Court 3: 30 mins']
+      parkName: 'Meerwood Park',
+      location: '4703 192nd Ave SE, Issaquah, WA',
+      courts: [['Court 1: ', '1 hr']]
     },
+    {
+      image: '/images/park3.jpg',
+      parkName: 'Tibbetts Valley Park',
+      location: '965 12th Ave NW, Issaquah, WA',
+      courts: [['Court 1: ', '1 hr'], ['Court 2: ', '30 min'], ['Court 3:', '1 hr'], ['Court 4:', '30 min']]
+    }
   ];
 
   return (
