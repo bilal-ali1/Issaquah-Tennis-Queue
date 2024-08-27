@@ -12,7 +12,7 @@
     "test:backend": "npm --prefix backend test",
     "eject:backend": "npm --prefix backend eject"
   },
-  "dependencies": {
-    "concurrently": "^6.0.0"
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }

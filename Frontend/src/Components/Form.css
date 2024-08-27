@@ -40,6 +40,16 @@
     font-size: 1.2em; /* Increase the font size */
     text-align: center; /* Center the heading text */
   }
+
+  form select {
+    margin-top: 0; /* Remove top margin */
+    margin-bottom: 15px;
+    padding: 5px;
+    appearance: none; /* Removes default arrow in some browsers */
+    background-color: #f9f9f9;
+    cursor: pointer;
+    border-radius: 5px;
+  }
   
   /* Styles for the submit and close buttons */
   .form-popup button[type="submit"],
