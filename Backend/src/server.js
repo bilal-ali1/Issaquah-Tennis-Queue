@@ -1,25 +1,43 @@
+// server.js
 const express = require('express');
-// const cors = require('cors');
-// const bodyParser = require('body-parser');
-// require('dotenv').config();
-const path = require('path');
-
 const app = express();
+const port = process.env.PORT || 5000;
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/index.html'));
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// In-memory data storage
+let users = [];
+
+// POST endpoint to add a new user
+app.post('/api/users', (req, res) => {
+  const { name, phone } = req.body;
+
+  if (!name || !phone) {
+    return res.status(400).json({ error: 'Name and phone are required.' });
+  }
+
+  const newUser = {
+    id: users.length + 1,
+    name,
+    phone,
+    createdAt: new Date(),
+  };
+
+  users.push(newUser);
+
+  return res.status(201).json({
+    message: 'User added successfully.',
+    user: newUser,
+  });
 });
 
+// GET endpoint to retrieve all users
 app.get('/api/users', (req, res) => {
-  const users = [
-    { id: 1, name: 'John' },
-    { id: 2, name: 'Brad' },
-    { id: 3, name: 'Jane' },
-  ];
-  res.json(users);
+  return res.status(200).json(users);
 });
 
-app.listen(8000, () => {
-  console.log(`Server is running on port 8000`)
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
-

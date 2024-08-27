@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Card.css'
+import Form from './Form'
 
 function Card({ image, parkName, location, courts }) {
+  const [showForm, setShowForm] = useState(false);
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+  };
+
   return (
     <div className="card">
       <img src={image} alt={`${parkName}`} className="card-image" />
@@ -14,8 +25,9 @@ function Card({ image, parkName, location, courts }) {
             <li key={index}>{court}</li>
           ))}
         </ul>
-        <button className="card-button">Book a time</button>
+        <button className="card-button" onClick={toggleForm}>Book a time</button>
       </div>
+      {showForm && <Form onClose={handleCloseForm} />}
     </div>
   );
 }
