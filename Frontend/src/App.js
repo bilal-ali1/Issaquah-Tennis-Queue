@@ -36,9 +36,9 @@ function App() {
       <Navbar />
       <h1 className="title">Parks Nearby</h1>
       <div className="card-grid">
-        {parks.map((park, availibility) => (
+        {parks.map((park, index) => (
           <Card
-            key={availibility}
+            key={index}
             image={park.image}
             parkName={park.parkName}
             location={park.location}
