@@ -16,7 +16,7 @@ const Form = ({ onClose }) => {
     const formData = { name, phone };
 
     try {
-      const response = await fetch('/api/users', {
+      const response = await fetch('/api/parks/tibbettsValleyPark/courts/1/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,8 +28,8 @@ const Form = ({ onClose }) => {
 
       if (response.ok) {
         alert(result.message);
-        setName('');
-        setPhone('');
+        setName(name);
+        setPhone(phone);
         onClose();
       } else {
         alert(result.error || 'Failed to add user.');

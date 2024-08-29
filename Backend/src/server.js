@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 9000;
+const port = process.env.PORT || 1000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -14,7 +14,8 @@ let parks = {
 };
 
 // POST endpoint to add a new user to a specific court in a park
-app.post('/api/parks/:parkName/courts/:courtId/users', (req, res) => {
+app.post('/api/parks/tibbettsValleyPark/courts/1/users', (req, res) => {
+  console.log('Request received:', req.body);
   const { name, phone } = req.body;
   const { parkName, courtId } = req.params;
 
@@ -37,6 +38,8 @@ app.post('/api/parks/:parkName/courts/:courtId/users', (req, res) => {
 
   parks[parkName][courtIndex].push(newUser);
 
+  console.log(`Current data for ${parkName}:`, JSON.stringify(parks[parkName], null, 2));
+
   return res.status(201).json({
     message: `User added to ${parkName} - Court ${courtId} successfully.`,
     user: newUser,
@@ -54,6 +57,7 @@ app.get('/api/parks/:parkName/courts/:courtId/users', (req, res) => {
   }
 
   return res.status(200).json(parks[parkName][courtIndex]);
+  console.log(parks[parkName][courtIndex]);
 });
 
 // Start the server
@@ -61,4 +65,4 @@ app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
 
-console.log(parks);
+
