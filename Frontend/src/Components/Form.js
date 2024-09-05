@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 const Form = ({ onClose }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [court, setCourt] = useState('');
   const [duration, setDuration] = useState('30 mins');
   const [loading, setLoading] = useState(false);
 
@@ -15,7 +16,7 @@ const Form = ({ onClose }) => {
     e.preventDefault();
     setLoading(true);
 
-    const formData = { name, phone, duration };
+    const formData = { name, phone, court, duration };
 
     try {
       const response = await fetch('/api/users', {
@@ -32,6 +33,7 @@ const Form = ({ onClose }) => {
         alert(result.message);
         setName('');
         setPhone('');
+        setCourt('')
         onClose();
       } else {
         alert(result.error || 'Failed to add user.');
@@ -63,6 +65,14 @@ const Form = ({ onClose }) => {
         <option value="30 mins">30 mins</option>
         <option value="45 mins">45 mins</option>
         <option value="1 hour">1 hour</option>
+        </select>
+        <label htmlFor="court">Select Court: </label>
+        <select 
+        id="court" 
+        name="court" 
+        required 
+        onChange={(e) => setCourt(e.target.value)}>
+        <option value="court">court</option>
         </select>
         <button type="submit" disabled={loading}>{loading ? 'Submitting...' : 'Submit'}</button>
       </form>

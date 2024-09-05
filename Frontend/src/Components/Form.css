@@ -41,9 +41,11 @@
     text-align: center; /* Center the heading text */
   }
 
-  form select {
-    margin-top: 0; /* Remove top margin */
-    margin-bottom: 15px;
+  form select[id="court"], 
+  form select[id="duration"] {
+    display: block;
+    margin-top: 0px; /* Remove top margin */
+    margin-bottom: 5px;
     padding: 5px;
     appearance: none; /* Removes default arrow in some browsers */
     background-color: #f9f9f9;
