@@ -1,13 +1,14 @@
 This project is a full-stack web application designed to streamline the process of reserving courts at local parks, eliminating the need for individuals to physically visit each park to check court availability. The application leverages a queue-based data structure to manage reservations efficiently, ensuring a fair and transparent booking system for park-goers.
 
-Frontend Development:
+**Frontend Development:**
 Technology Used: React.js
 Functionality:
 The frontend provides users with an intuitive interface to select a park and view the availability of its courts.
 Users can easily choose a park, view the list of courts, and book a time slot directly through the application.
 The interface updates in real-time, reflecting changes in availability as users book or cancel reservations.
 A responsive design ensures seamless access across various devices, including desktops, tablets, and smartphones.
-Backend Development:
+
+**Backend Development:**
 Technology Used: Node.js with Express.js
 Functionality:
 The backend manages the data and logic for court reservations. Each park is represented by a collection of queues, where each queue corresponds to a specific court.
