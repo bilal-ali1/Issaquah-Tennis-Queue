@@ -27,7 +27,7 @@ function Card({ image, parkName, location, courts }) {
         </ul>
         <button className="card-button" onClick={toggleForm}>Book a time</button>
       </div>
-      {showForm && <Form onClose={handleCloseForm} />}
+      {showForm && <Form parkName={parkName} numOfCourts={courts.length} onClose={handleCloseForm} />}
     </div>
   );
 }

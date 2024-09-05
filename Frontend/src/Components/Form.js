@@ -1,22 +1,28 @@
 import './Form.css';
-import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 
-const Form = ({ onClose }) => {
+const Form = ({ parkName, numOfCourts, onClose }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [selectedCourt, setSelectedCourt] = useState(numOfCourts === 1 ? 1 : ''); 
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (numOfCourts === 1) {
+      setSelectedCourt(1);
+    }
+  }, [numOfCourts]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const formData = { name, phone };
+    const formData = { name, phone, park: parkName, court: selectedCourt };
 
     try {
-      const response = await fetch('/api/parks/tibbettsValleyPark/courts/1/users', {
+      const response = await fetch('http://localhost:1000/api/form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -27,9 +33,9 @@ const Form = ({ onClose }) => {
       const result = await response.json();
 
       if (response.ok) {
-        alert(result.message);
         setName(name);
         setPhone(phone);
+        setSelectedCourt(numOfCourts === 1 ? 1 : '');
         onClose();
       } else {
         alert(result.error || 'Failed to add user.');
@@ -46,12 +52,31 @@ const Form = ({ onClose }) => {
   return (
     <div className="form-popup">
       <span className="close-button" onClick={onClose}>&times;</span>
-      <form>
-        <h2>Add Your Name to the List!</h2>
+      <form onSubmit={handleSubmit}>
+        <h2>Reserve a Court at {parkName}</h2>
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" name="name" required onChange={(e) => setName(e.target.value)}/>
         <label htmlFor="phone">Phone Number:</label>
         <input type="tel" id="phone" name="phone" required onChange={(e) => setPhone(e.target.value)}/>
+        {numOfCourts > 1 && (
+          <div>
+            <label htmlFor="court">Select Court:</label>
+            <select
+              id="court"
+              name="court"
+              required
+              value={selectedCourt}
+              onChange={(e) => setSelectedCourt(e.target.value)}
+            >
+              <option value="" disabled>Select a court</option>
+              {Array.from({ length: numOfCourts }, (_, index) => (
+                <option key={index + 1} value={index + 1}>
+                  Court {index + 1}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
         <button type="submit" disabled={loading}>{loading ? 'Submitting...' : 'Submit'}</button>
       </form>
     </div>
