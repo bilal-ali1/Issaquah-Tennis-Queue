@@ -8,25 +8,64 @@ const port = 1000;
 app.use(express.json());
 
 // In-memory data storage for parks with queues based on the number of courts
-let parks = {
-  tibbettsValleyPark: Array(4).fill([]).map(() => []), // 4 courts
-  centralPark: Array(2).fill([]).map(() => []),        // 2 courts
-  meerwoodPark: Array(1).fill([]).map(() => []),       // 1 court
-  blackNuggetPark: Array(2).fill([]).map(() => []),    // 2 courts
+const parks = {
+  "Tibbetts Valley Park": {
+    courts: [
+      { courtId: 1, reservedBy: null },
+      { courtId: 2, reservedBy: null },
+      { courtId: 3, reservedBy: null },
+      { courtId: 4, reservedBy: null }
+    ]
+  },
+  "Central Park": {
+    courts: [
+      { courtId: 1, reservedBy: null },
+      { courtId: 2, reservedBy: null }
+    ]
+  },
+  "Meerwood Park": {
+    courts: [
+      { courtId: 1, reservedBy: null }
+    ]
+  },
+  "Black Nugget Park": {
+    courts: [
+      { courtId: 1, reservedBy: null },
+      { courtId: 2, reservedBy: null }
+    ]
+  }
 };
 
-let users = { }
+let users = [ ];
 
 // POST endpoint to add a new user to a specific court in a park
 app.post('/api/form', (req, res) => {
   console.log('Request received:', req.body);
 
-  // Extract name and phone from the request body
-  const { name, phone } = req.body;
+  // Extract name and phone and park and court from the request body
+  const { name, phone, park, court } = req.body;
+
+  const selectedPark = parks[park];
+  const selectedCourt = selectedPark.courts.find(c => c.courtId === parseInt(court));
+
+  if (selectedCourt.reservedBy) {
+    return res.status(400).json({ error: `Court ${court} at ${park} is already reserved by ${selectedCourt.reservedBy.name}.` });
+  }
+
+  selectedCourt.reservedBy = { name, phone };
+
+
+  console.log(`User ${name} reserved Court ${court} at ${park} with phone number ${phone}`);
+
+
 
   // Simulate adding the user (in a real application, you'd probably save this to a database
   const newUser = { name, phone };
-  console.log(`User ${name} added with phone number ${phone}`);
+  users.push(newUser);
+  // console.log(`User ${name} added with phone number ${phone}`);
+  
+  console.log(parks);
+  console.log(users);
 
   // Return success response
   return res.status(201).json({
@@ -39,6 +78,7 @@ app.post('/api/form', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
 
 
 
