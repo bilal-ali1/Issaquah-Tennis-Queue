@@ -9,7 +9,7 @@ function App() {
   const [error, setError] = useState(null);
 
   // Function to fetch parks data from the backend
-  const fetchParksData = async () => {
+  const fetchPparksData = async () => {
     try {
       const response = await fetch('http://localhost:1000/api/parks');
       if (!response.ok) {
@@ -18,10 +18,11 @@ function App() {
       const data = await response.json();
 
       // Convert backend structure to match the frontend structure
-      const updatedParks = Object.keys(data).map(parkName => {
-        let location = ''; 
-        let image = ''; 
+      const updatedParks = Object.keys(data).map((parkName) => {
+        let location = '';
+        let image = '';
 
+        // Set locations and images for parks
         switch (parkName) {
           case 'Central Park':
             location = '1907 NE Park Dr, Issaquah, WA';
@@ -43,14 +44,17 @@ function App() {
             break;
         }
 
+        // Update the courts array to include duration information
         return {
           parkName,
           location,
           image,
-          courts: data[parkName].courts.map(court => [
-            `Court ${court.courtId}: `,
-            court.reservedBy ? 'Reserved' : 'Open',
-          ]),
+          courts: data[parkName].courts.map((court) => {
+            const status = court.reservedBy
+              ? `Reserved by ${court.reservedBy} ~ ${court.durationRemaining} min left`
+              : 'Open';
+            return `Court ${court.courtId}: ${status}`;
+          }),
         };
       });
 
@@ -64,10 +68,10 @@ function App() {
 
   // Polling with useEffect: fetch the parks data every 5 seconds
   useEffect(() => {
-    fetchParksData(); // Fetch the data immediately on component mount
+    fetchPparksData(); // Fetch the data immediately on component mount
 
     const interval = setInterval(() => {
-      fetchParksData(); // Poll the backend every 5 seconds
+      fetchPparksData(); // Poll the backend every 5 seconds
     }, 5000);
 
     return () => clearInterval(interval); // Cleanup the interval on component unmount
