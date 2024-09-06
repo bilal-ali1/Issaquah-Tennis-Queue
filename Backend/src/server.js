@@ -2,9 +2,21 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const port = 1000;
+const http = require('http');
+const { Server } = require('socket.io');
+
+
+// Create an HTTP server for Socket.io
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+  },
+});
 
 // Middleware to parse JSON bodies
- app.use(cors({origin: 'http://localhost:3000'}));
+app.use(cors({origin: 'http://localhost:3000'}));
 app.use(express.json());
 
 // In-memory data storage for parks with queues based on the number of courts
@@ -37,6 +49,21 @@ const parks = {
 };
 
 let users = [ ];
+
+
+// WebSocket connection handler
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  // Listen for reservation events and emit updates to all connected clients
+  socket.on('reserveCourt', () => {
+    io.emit('updateParks', parks); // Send updated parks data to all connected clients
+  });
+
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
+  });
+});
 
 // POST endpoint to add a new user to a specific court in a park
 app.post('/api/form', (req, res) => {
@@ -73,6 +100,11 @@ app.post('/api/form', (req, res) => {
     message: `User ${name} added successfully.`,
     user: newUser,
   });
+});
+
+// GET endpoint to fetch the parks data
+app.get('/api/parks', (req, res) => {
+  res.json(parks); // Send the parks data to the frontend
 });
 
 // Start the server

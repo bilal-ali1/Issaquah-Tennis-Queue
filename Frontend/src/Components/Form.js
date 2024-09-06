@@ -36,6 +36,7 @@ const Form = ({ parkName, numOfCourts, onClose }) => {
         setName(name);
         setPhone(phone);
         setSelectedCourt(numOfCourts === 1 ? 1 : '');
+        alert('Sucess! Your reservation has been made.');
         onClose();
       } else {
         alert(result.error || 'Failed to add user.');
