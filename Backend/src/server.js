@@ -40,6 +40,7 @@ let users = [ ];
 
 // POST endpoint to add a new user to a specific court in a park
 app.post('/api/form', (req, res) => {
+  console.log(parks);
   console.log('Request received:', req.body);
 
   // Extract name and phone and park and court from the request body
@@ -49,13 +50,16 @@ app.post('/api/form', (req, res) => {
   const selectedCourt = selectedPark.courts.find(c => c.courtId === parseInt(court));
 
   if (selectedCourt.reservedBy) {
-    return res.status(400).json({ error: `Court ${court} at ${park} is already reserved by ${selectedCourt.reservedBy.name}.` });
+    return res.status(400).json({ error: `Court ${court} at ${park} is already reserved by ${selectedCourt.reservedBy}.` });
   }
 
-  selectedCourt.reservedBy = { name, phone };
+  selectedCourt.reservedBy = name;
+
+  console.log(selectedCourt);
 
 
   console.log(`User ${name} reserved Court ${court} at ${park} with phone number ${phone}`);
+  console.log(parks[park]);
 
 
 
@@ -63,9 +67,6 @@ app.post('/api/form', (req, res) => {
   const newUser = { name, phone };
   users.push(newUser);
   // console.log(`User ${name} added with phone number ${phone}`);
-  
-  console.log(parks);
-  console.log(users);
 
   // Return success response
   return res.status(201).json({
