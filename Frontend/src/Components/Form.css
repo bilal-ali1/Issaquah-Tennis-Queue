@@ -10,6 +10,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for a floating effect */
     z-index: 1000; /* Ensure the form appears above other elements */
     width: 300px; /* Width of the form */
+    cursor: auto;
   }
 
   .close-button {
@@ -75,5 +76,39 @@
   .close-button:hover {
     color: #060606;
   }
+
+  /* Style for the select dropdown */
+select {
+  width: 100%; /* Make the dropdown full width */
+  padding: 10px; /* Add padding for better spacing */
+  border: 1px solid #ccc; /* Define border */
+  border-radius: 5px; /* Round the corners */
+  background-color: #f9f9f9; /* Light background */
+  font-size: 16px; /* Font size */
+  color: #333; /* Font color */
+  margin-bottom: 15px; /* Space between the dropdown and other elements */
+  appearance: none; /* Remove default dropdown arrow */
+  -webkit-appearance: none; /* Remove dropdown arrow on Safari */
+  -moz-appearance: none; /* Remove dropdown arrow on Firefox */
+  background-image: url('/public/images/down-arrow.png'); /* Custom dropdown arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px center; /* Position the custom arrow */
+  background-size: 12px; /* Size of the custom arrow */
+}
+
+/* Style for the options inside the dropdown */
+select option {
+  padding: 10px; /* Padding inside the options */
+  background-color: #fff; /* Background color for options */
+  color: #333; /* Text color */
+}
+
+/* Optional: Change the style of the dropdown on hover */
+select:hover {
+  border-color: #888; /* Change the border color on hover */
+  background-color: #f0f0f0; /* Slightly darker background on hover */
+  cursor: pointer;
+}
+
   
   

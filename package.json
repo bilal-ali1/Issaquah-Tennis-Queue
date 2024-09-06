@@ -12,7 +12,8 @@
     "test:backend": "npm --prefix backend test",
     "eject:backend": "npm --prefix backend eject"
   },
-  "devDependencies": {
-    "concurrently": "^8.2.2"
+  "dependencies": {
+    "concurrently": "^6.0.0",
+    "cors": "^2.8.5"
   }
 }

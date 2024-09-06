@@ -1,25 +1,28 @@
 import './Form.css';
-import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 
-const Form = ({ onClose }) => {
+const Form = ({ parkName, numOfCourts, onClose }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [court, setCourt] = useState('');
-  const [duration, setDuration] = useState('30 mins');
+  const [selectedCourt, setSelectedCourt] = useState(numOfCourts === 1 ? 1 : ''); 
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (numOfCourts === 1) {
+      setSelectedCourt(1);
+    }
+  }, [numOfCourts]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const formData = { name, phone, court, duration };
+    const formData = { name, phone, park: parkName, court: selectedCourt };
 
     try {
-      const response = await fetch('/api/parks/tibbettsValleyPark/courts/1/users', {
+      const response = await fetch('http://localhost:1000/api/form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,9 +33,9 @@ const Form = ({ onClose }) => {
       const result = await response.json();
 
       if (response.ok) {
-        alert(result.message);
         setName(name);
         setPhone(phone);
+        setSelectedCourt(numOfCourts === 1 ? 1 : '');
         onClose();
       } else {
         alert(result.error || 'Failed to add user.');
@@ -49,30 +52,31 @@ const Form = ({ onClose }) => {
   return (
     <div className="form-popup">
       <span className="close-button" onClick={onClose}>&times;</span>
-      <form>
-        <h2>Add Your Name to the List!</h2>
-        <label htmlFor="name">Full Name:</label>
+      <form onSubmit={handleSubmit}>
+        <h2>Reserve a Court at {parkName}</h2>
+        <label htmlFor="name">Name:</label>
         <input type="text" id="name" name="name" required onChange={(e) => setName(e.target.value)}/>
         <label htmlFor="phone">Phone Number:</label>
         <input type="tel" id="phone" name="phone" required onChange={(e) => setPhone(e.target.value)}/>
-        <label htmlFor="duration">Select Duration: </label>
-        <select 
-        id="duration" 
-        name="duration" 
-        required 
-        onChange={(e) => setDuration(e.target.value)}>
-        <option value="30 mins">30 mins</option>
-        <option value="45 mins">45 mins</option>
-        <option value="1 hour">1 hour</option>
-        </select>
-        <label htmlFor="court">Select Court: </label>
-        <select 
-        id="court" 
-        name="court" 
-        required 
-        onChange={(e) => setCourt(e.target.value)}>
-        <option value="court">court</option>
-        </select>
+        {numOfCourts > 1 && (
+          <div>
+            <label htmlFor="court">Select Court:</label>
+            <select
+              id="court"
+              name="court"
+              required
+              value={selectedCourt}
+              onChange={(e) => setSelectedCourt(e.target.value)}
+            >
+              <option value="" disabled>Select a court</option>
+              {Array.from({ length: numOfCourts }, (_, index) => (
+                <option key={index + 1} value={index + 1}>
+                  Court {index + 1}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
         <button type="submit" disabled={loading}>{loading ? 'Submitting...' : 'Submit'}</button>
       </form>
     </div>
