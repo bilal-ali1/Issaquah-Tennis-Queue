@@ -1,35 +1,85 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './Components/Navbar';
 import Card from './Components/Card';
 import './App.css';
 
 function App() {
-  const parks = [
-    {
-      image: '/images/nyc.jpg', 
-      parkName: 'Central Park',
-      location: '1907 NE Park Dr, Issaquah, WA',
-      courts: [['Court 1: ', '30 mins'], ['Court 2: ', '1 hr']]
-    },
-    {
-      image: '/images/park2.webp',
-      parkName: 'Black Nugget Park',
-      location: '1953 24th Ave NE, Issaquah, WA',
-      courts: [['Court 1: ', '30 mins'] , ['Court 2: ', 'Open']]
-    },
-    {
-      image: '/images/park3.jpg',
-      parkName: 'Meerwood Park',
-      location: '4703 192nd Ave SE, Issaquah, WA',
-      courts: [['Court 1: ', '1 hr']]
-    },
-    {
-      image: '/images/park3.jpg',
-      parkName: 'Tibbetts Valley Park',
-      location: '965 12th Ave NW, Issaquah, WA',
-      courts: [['Court 1: ', '1 hr'], ['Court 2: ', '30 min'], ['Court 3:', '1 hr'], ['Court 4:', '30 min']]
+  const [parks, setParks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Function to fetch parks data from the backend
+  const fetchParksData = async () => {
+    try {
+      const response = await fetch('http://localhost:1000/api/parks');
+      if (!response.ok) {
+        throw new Error('Failed to fetch parks data');
+      }
+      const data = await response.json();
+
+      // Convert backend structure to match the frontend structure
+      const updatedParks = Object.keys(data).map(parkName => {
+        let location = ''; 
+        let image = ''; 
+
+        switch (parkName) {
+          case 'Central Park':
+            location = '1907 NE Park Dr, Issaquah, WA';
+            image = '/images/nyc.jpg';
+            break;
+          case 'Black Nugget Park':
+            location = '1953 24th Ave NE, Issaquah, WA';
+            image = '/images/park2.webp';
+            break;
+          case 'Meerwood Park':
+            location = '4703 192nd Ave SE, Issaquah, WA';
+            image = '/images/park3.jpg';
+            break;
+          case 'Tibbetts Valley Park':
+            location = '965 12th Ave NW, Issaquah, WA';
+            image = '/images/park3.jpg';
+            break;
+          default:
+            break;
+        }
+
+        return {
+          parkName,
+          location,
+          image,
+          courts: data[parkName].courts.map(court => [
+            `Court ${court.courtId}: `,
+            court.reservedBy ? 'Reserved' : 'Open',
+          ]),
+        };
+      });
+
+      setParks(updatedParks);
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
     }
-  ];
+  };
+
+  // Polling with useEffect: fetch the parks data every 5 seconds
+  useEffect(() => {
+    fetchParksData(); // Fetch the data immediately on component mount
+
+    const interval = setInterval(() => {
+      fetchParksData(); // Poll the backend every 5 seconds
+    }, 5000);
+
+    return () => clearInterval(interval); // Cleanup the interval on component unmount
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="App">
@@ -51,5 +101,3 @@ function App() {
 }
 
 export default App;
-
-
