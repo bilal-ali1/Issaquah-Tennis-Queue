@@ -7,7 +7,7 @@ function Navbar() {
       <div className="logo">
         <span role="img" aria-label="tree">🎾</span> ParkCourtFinder
       </div>
-      <input type="text" placeholder="Search for parks or courts" className="search-input" />
+      {/* <input type="text" placeholder="Search for parks or courts" className="search-input" /> */}
     </nav>
   );
 }

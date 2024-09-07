@@ -7,6 +7,7 @@ const Form = ({ parkName, numOfCourts, onClose }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [selectedCourt, setSelectedCourt] = useState(numOfCourts === 1 ? 1 : ''); 
+  const [selectedDuration, setSelectedDuration] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const Form = ({ parkName, numOfCourts, onClose }) => {
     e.preventDefault();
     setLoading(true);
 
-    const formData = { name, phone, park: parkName, court: selectedCourt };
+    const formData = { name, phone, park: parkName, court: selectedCourt, duration: selectedDuration };
 
     try {
       const response = await fetch('http://localhost:1000/api/form', {
@@ -36,6 +37,7 @@ const Form = ({ parkName, numOfCourts, onClose }) => {
         setName(name);
         setPhone(phone);
         setSelectedCourt(numOfCourts === 1 ? 1 : '');
+        setSelectedDuration('');
         alert('Sucess! Your reservation has been made.');
         onClose();
       } else {
@@ -78,6 +80,19 @@ const Form = ({ parkName, numOfCourts, onClose }) => {
             </select>
           </div>
         )}
+        <label htmlFor="duration">Select Duration:</label>
+        <select
+          id="duration"
+          name="duration"
+          required
+          value={selectedDuration}
+          onChange={(e) => setSelectedDuration(e.target.value)}
+        >
+          <option value="" disabled>Select duration</option>
+          <option value="30 minutes">30 minutes</option>
+          <option value="45 minutes">45 minutes</option>
+          <option value="60 minutes">60 minutes</option>
+        </select>
         <button type="submit" disabled={loading}>{loading ? 'Submitting...' : 'Submit'}</button>
       </form>
     </div>

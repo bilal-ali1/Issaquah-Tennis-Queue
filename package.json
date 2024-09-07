@@ -1,5 +1,5 @@
 {
-  "name": "Tennis Queue",
+  "name": "tennis-queue",
   "version": "1.0.0",
   "scripts": {
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
