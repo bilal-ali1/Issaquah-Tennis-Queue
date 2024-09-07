@@ -23,7 +23,7 @@ const Form = ({ parkName, numOfCourts, onClose }) => {
     const formData = { name, phone, park: parkName, court: selectedCourt, duration: selectedDuration };
 
     try {
-      const response = await fetch('http://localhost:1000/api/form', {
+      const response = await fetch('https://issaquah-tennis-queue.onrender.com/api/form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

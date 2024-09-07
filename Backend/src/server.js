@@ -9,13 +9,13 @@ const { Server } = require('socket.io');
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'https://issaquah-tennis-queue.vercel.app/',
     methods: ['GET', 'POST'],
   },
 });
 
 // Middleware to parse JSON bodies
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: 'https://issaquah-tennis-queue.vercel.app/' }));
 app.use(express.json());
 
 // In-memory data storage for parks with courts and reservation duration

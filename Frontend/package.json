@@ -15,7 +15,7 @@
     "socket.io-client": "^4.7.5",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "http://localhost:1000",
+  "proxy": "https://issaquah-tennis-queue.onrender.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
