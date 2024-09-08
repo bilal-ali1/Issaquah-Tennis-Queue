@@ -119,7 +119,7 @@ app.post('https://issaquah-tennis-queue.onrender.com/api/form', (req, res) => {
 });
 
 // GET endpoint to fetch the parks data
-app.get('https://issaquah-tennis-queue.vercel.app/api/parks', (req, res) => {
+app.get('https://issaquah-tennis-queue.onrender.com/api/parks', (req, res) => {
   res.json(parks); // Send the parks data to the frontend
 });
 
