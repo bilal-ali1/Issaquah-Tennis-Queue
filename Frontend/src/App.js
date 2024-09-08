@@ -11,7 +11,7 @@ function App() {
   // Function to fetch parks data from the backend
   const fetchPparksData = async () => {
     try {
-      const response = await fetch('https://issaquah-tennis-queue.vercel.app/api/parks');
+      const response = await fetch('https://issaquah-tennis-queue.onrender.com/api/parks');
       if (!response.ok) {
         throw new Error('Failed to fetch parks data');
       }
