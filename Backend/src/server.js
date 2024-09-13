@@ -9,14 +9,26 @@ const { Server } = require('socket.io');
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'https://issaquah-tennis-queue.vercel.app',
-    methods: ['POST', 'GET'],
+    origin: allowedOrigins,
+    methods: ['GET', 'POST'],
   },
 });
 
 // Middleware to parse JSON bodies
-app.use(cors({ origin: 'https://issaquah-tennis-queue.vercel.app' }));
-app.use(express.json());
+const allowedOrigins = [
+  'https://issaquah-tennis-queue.vercel.app', // previous vercel URL
+  'https://issaquah-tennis-queue-iqlibwohn-bilals-projects-1cd130f5.vercel.app' // current vercel URL
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 
 // In-memory data storage for parks with courts and reservation duration
 const parks = {
