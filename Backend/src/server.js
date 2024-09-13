@@ -16,28 +16,16 @@ const allowedOrigins = [
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: (origin, callback) => {
-      // If origin is in the allowed list, allow it
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        // Otherwise, block it
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    methods: ['GET', 'POST']
-  }
+    origin: '*',  // Allow all origins
+    methods: ['GET', 'POST'],  // Allow specific methods
+  },
 });
+
 
 // Middleware to parse JSON bodies
 app.use(cors({
-  origin: function (origin, callback) {
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
+  origin: '*',  // Allow all origins
+  methods: ['GET', 'POST'],  // Allow specific methods
 }));
 
 // In-memory data storage for parks with courts and reservation duration
