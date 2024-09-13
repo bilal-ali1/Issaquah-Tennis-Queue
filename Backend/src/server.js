@@ -10,7 +10,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: 'https://issaquah-tennis-queue.vercel.app/',
-    methods: ['GET', 'POST'],
+    methods: ['POST', 'GET'],
   },
 });
 
