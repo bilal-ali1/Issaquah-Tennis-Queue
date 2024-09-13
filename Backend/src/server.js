@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = process.env.PORT || 1000;
+const port = process.env.PORT;
 const http = require('http');
 const { Server } = require('socket.io');
 
@@ -9,13 +9,13 @@ const { Server } = require('socket.io');
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'https://issaquah-tennis-queue.vercel.app/',
+    origin: 'https://issaquah-tennis-queue.vercel.app',
     methods: ['POST', 'GET'],
   },
 });
 
 // Middleware to parse JSON bodies
-app.use(cors({ origin: 'https://issaquah-tennis-queue.vercel.app/' }));
+app.use(cors({ origin: 'https://issaquah-tennis-queue.vercel.app' }));
 app.use(express.json());
 
 // In-memory data storage for parks with courts and reservation duration
