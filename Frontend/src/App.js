@@ -9,7 +9,7 @@ function App() {
   const [error, setError] = useState(null);
 
   // Function to fetch parks data from the backend
-  const fetchPparksData = async () => {
+  const fetchParksData = async () => {
     try {
       const response = await fetch('https://issaquah-tennis-queue.onrender.com/api/parks');
       if (!response.ok) {
@@ -68,10 +68,10 @@ function App() {
 
   // Polling with useEffect: fetch the parks data every 5 seconds
   useEffect(() => {
-    fetchPparksData(); // Fetch the data immediately on component mount
+    fetchParksData(); // Fetch the data immediately on component mount
 
     const interval = setInterval(() => {
-      fetchPparksData(); // Poll the backend every 5 seconds
+      fetchParksData(); // Poll the backend every 5 seconds
     }, 5000);
 
     return () => clearInterval(interval); // Cleanup the interval on component unmount
