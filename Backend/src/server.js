@@ -6,8 +6,6 @@ const http = require('http');
 const { Server } = require('socket.io');
 
 
-app.use(express.static(path.join(__dirname, 'public')));
-
 const allowedOrigins = [
   'https://issaquah-tennis-queue.vercel.app', // previous vercel URL
   'https://issaquah-tennis-queue-iqlibwohn-bilals-projects-1cd130f5.vercel.app' // current vercel URL
