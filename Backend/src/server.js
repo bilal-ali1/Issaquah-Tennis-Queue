@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = 1000;
+const port = process.env.PORT || 1000;
 const http = require('http');
 const { Server } = require('socket.io');
 
@@ -80,7 +80,7 @@ const startReservationTimer = (selectedCourt, parkName) => {
 };
 
 // POST endpoint to add a new user to a specific court in a park
-app.post('/api/form', (req, res) => {
+app.post('https://issaquah-tennis-queue.onrender.com/api/form', (req, res) => {
   console.log('Request received:', req.body);
 
   // Extract name, phone, park, court, and duration from the request body
@@ -119,7 +119,7 @@ app.post('/api/form', (req, res) => {
 });
 
 // GET endpoint to fetch the parks data
-app.get('/api/parks', (req, res) => {
+app.get('https://issaquah-tennis-queue.onrender.com/api/parks', (req, res) => {
   res.json(parks); // Send the parks data to the frontend
 });
 
