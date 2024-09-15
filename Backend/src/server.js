@@ -16,10 +16,10 @@ const io = new Server(server, {
 
 
 // Middleware to parse JSON bodies
-app.use(cors({
-  origin: '*',  // Allow all origins
-  methods: ['GET', 'POST'],  // Allow specific methods
-}));
+// app.use(cors({
+//   origin: '*',  // Allow all origins
+//   methods: ['GET', 'POST'],  // Allow specific methods
+// }));
 
 app.use(express.json());
 
