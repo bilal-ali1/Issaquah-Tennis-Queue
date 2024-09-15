@@ -21,6 +21,8 @@ app.use(cors({
   methods: ['GET', 'POST'],  // Allow specific methods
 }));
 
+app.use(express.json());
+
 // In-memory data storage for parks with courts and reservation duration
 const parks = {
   "Tibbetts Valley Park": {
