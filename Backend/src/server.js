@@ -5,12 +5,6 @@ const port = process.env.PORT;
 const http = require('http');
 const { Server } = require('socket.io');
 
-
-const allowedOrigins = [
-  'https://issaquah-tennis-queue.vercel.app', // previous vercel URL
-  'https://issaquah-tennis-queue-iqlibwohn-bilals-projects-1cd130f5.vercel.app' // current vercel URL
-];
-
 // Create an HTTP server for Socket.io
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -89,7 +83,7 @@ const startReservationTimer = (selectedCourt, parkName) => {
 };
 
 // POST endpoint to add a new user to a specific court in a park
-app.post('https://issaquah-tennis-queue.onrender.com/api/form', (req, res) => {
+app.post('/api/form', (req, res) => {
   console.log('Request received:', req.body);
 
   // Extract name, phone, park, court, and duration from the request body
@@ -128,7 +122,7 @@ app.post('https://issaquah-tennis-queue.onrender.com/api/form', (req, res) => {
 });
 
 // GET endpoint to fetch the parks data
-app.get('https://issaquah-tennis-queue.onrender.com/api/parks', (req, res) => {
+app.get('/api/parks', (req, res) => {
   res.json(parks); // Send the parks data to the frontend
 });
 
